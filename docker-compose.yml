@@ -1,0 +1,22 @@
+version : '3.3'
+services :
+  php-apache-environment:
+    image: andyrchm/quis2
+    container_name : php_apache
+    depends_on :
+      - db
+    volumes :
+      - ./php/src:/var/www/html/
+    ports :
+      -8080:80
+    networks:
+      - backend
+volumes :
+  db:
+    networks:
+      backend:
+        name: backend-network
+        ipam: 
+          driver: default
+          config :
+            - subnet : 172.20.0.0/24
